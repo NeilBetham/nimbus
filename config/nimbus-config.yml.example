@@ -1,0 +1,11 @@
+default: &default
+  token_expiry: 1.week
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+<<: *default

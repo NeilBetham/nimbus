@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  type: 
+  last_received: 2018-02-09 15:52:40
+  coord_north: 1.5
+  coord_east: 1.5
+  altitude: 1.5
+
+two:
+  name: MyString
+  type: 
+  last_received: 2018-02-09 15:52:40
+  coord_north: 1.5
+  coord_east: 1.5
+  altitude: 1.5
