@@ -49,16 +49,22 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+  gem 'guard', require: false
+  gem 'guard-livereload', '~> 2.5', require: false
+  gem 'rack-livereload', '~> 0.3.16'
+
+  gem 'pry'
+end
 
 # InfluxDB for TSDB
 gem 'influxdb', '~> 0.5.3'
 
 # Faraday for external web requests
-gem 'influxdb', '~> 0.5.3'
+gem 'faraday', '~> 0.9.1'
 
 # Sidekiq for background jobs
 gem 'sidekiq', '~> 5.0', '>= 5.0.5'
+
+# Slim for templates
+gem 'slim', '~> 3.0.6'

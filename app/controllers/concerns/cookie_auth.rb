@@ -4,8 +4,9 @@ module CookieAuth
   private
 
   def auth_via_cookie
-    return unless user = find_token(session_cookie).user
-    session[:user_id] = user.id
+    return unless token = find_token(session_cookie)
+    return unless token&.tokenable.is_a?(User)
+    session[:user_id] = token.tokenable.id
     self.session_cookie = Token.find_by_key(session_cookie).destroy.user.tokens.create.key
     redirect_back
   end

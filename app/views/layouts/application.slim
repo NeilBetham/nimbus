@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    = render 'shared/head'
+  body
+    main
+      header
+        = render 'shared/nav'
+      .container
+        .columns
+          .column.col-12
+            = yield

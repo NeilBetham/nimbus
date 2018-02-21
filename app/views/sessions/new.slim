@@ -1,0 +1,16 @@
+h2
+  | Nimbus
+
+.container
+  .columns
+    .column.col-5
+    .column.col-2
+      = form_tag sessions_path, id: 'login-form' do
+        .center
+          = text_field_tag :email, params[:email], id: 'email', placeholder: 'email', class: 'form-input'
+        br
+        .center
+          = password_field_tag :password, params[:password], id: 'password', placeholder: 'password', class: 'form-input'
+        br
+        .center
+          = submit_tag 'Log In', class: 'btn btn-primary'

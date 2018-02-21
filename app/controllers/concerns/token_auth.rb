@@ -21,7 +21,7 @@ module TokenAuth
   end
 
   def current_user
-    @current_user ||= @token.user if @token
+    @current_user ||= @token.tokenable if @token && @token&.tokenable.is_a?(User)
   end
 
   def unauthorized

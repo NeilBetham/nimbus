@@ -1,0 +1,10 @@
+.container
+  .columns
+    .column.col-12
+      .navbar
+        section.navbar-section
+          = link_to 'Nimbus', root_path, class: 'btn btn-link'
+        section.navbar-center
+        section.navbar-section
+          section.navbar-section
+            = link_to 'Logout', sessions_path, method: :delete, class: 'btn btn-link'
