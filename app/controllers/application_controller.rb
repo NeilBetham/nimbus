@@ -15,26 +15,17 @@ class ApplicationController < ActionController::Base
     redirect_to_auth unless current_user
   end
 
-  def redirect_back
-    redirect_to :back
-  rescue ActionController::RedirectBackError
-    return if redirect_from_auth
-    redirect_to root_path
-  end
-
-  def redirect_from_auth
-    return unless session[:auth_return_to]
-    redirect_to session[:auth_return_to]
-    session[:auth_return_to] = nil
-    true
+  def app_redirect_back
+    if session[:auth_return_to]
+      redirect_to session[:auth_return_to]
+      session[:auth_return_to] = nil
+    else
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def redirect_to_auth
     session[:auth_return_to] = request.fullpath
     redirect_to new_sessions_url, danger: 'Please Login'
-  end
-
-  def setup_search_form
-    @search_form = SearchForm.new
   end
 end

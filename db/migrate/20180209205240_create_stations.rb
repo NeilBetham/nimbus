@@ -1,6 +1,6 @@
-class CreateWeatherStations < ActiveRecord::Migration[5.1]
+class CreateStations < ActiveRecord::Migration[5.1]
   def change
-    create_table :weather_stations do |t|
+    create_table :stations do |t|
       t.string :name
       t.string :type
       t.datetime :last_received

@@ -7,8 +7,8 @@ module CookieAuth
     return unless token = find_token(session_cookie)
     return unless token&.tokenable.is_a?(User)
     session[:user_id] = token.tokenable.id
-    self.session_cookie = Token.find_by_key(session_cookie).destroy.user.tokens.create.key
-    redirect_back
+    self.session_cookie = Token.find_by_key(session_cookie).destroy.tokenable.tokens.create.key
+    app_redirect_back
   end
 
   def session_cookie=(value)

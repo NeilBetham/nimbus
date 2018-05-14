@@ -3,8 +3,8 @@ module TokenAuth
 
   included do
     protect_from_forgery with: :null_session
-    before_filter :authenticate_request
-    skip_before_action :authenticate, :configured?, :setup_search_form
+    before_action :authenticate_request
+    skip_before_action :authenticate
   end
 
   private

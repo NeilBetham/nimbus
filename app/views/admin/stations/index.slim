@@ -1,0 +1,23 @@
+h1 Weather Stations
+
+- if @stations.any?
+  table.table.table-striped
+    tbody
+      tr
+        th Name
+        th Type
+        th Last Update
+        th
+      - @stations.each do |station|
+        tr
+          td = station.name
+          td = station.type
+          td = station.last_received
+          td
+            = link_to 'Edit', edit_admin_station_path(station), class: 'btn btn-primary'
+            = link_to 'Remove', admin_station_path(station), method: :delete, class: 'btn btn-primary'
+- else
+  h2 No Stations Configured
+  p
+    | Get started adding one
+    = link_to 'here.', new_admin_station_path, class: 'btn btn-link'

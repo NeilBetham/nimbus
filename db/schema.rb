@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180209210238) do
+ActiveRecord::Schema.define(version: 20180513011936) do
+
+  create_table "stations", force: :cascade do |t|
+    t.string "name"
+    t.string "type"
+    t.datetime "last_received"
+    t.float "coord_north"
+    t.float "coord_east"
+    t.float "altitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "tokens", force: :cascade do |t|
     t.text "key"
@@ -24,17 +35,6 @@ ActiveRecord::Schema.define(version: 20180209210238) do
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "weather_stations", force: :cascade do |t|
-    t.string "name"
-    t.string "type"
-    t.datetime "last_received"
-    t.float "coord_north"
-    t.float "coord_east"
-    t.float "altitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: tokens
+#
+#  id             :integer          not null, primary key
+#  key            :text
+#  expires_at     :datetime
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  tokenable_id   :integer
+#  tokenable_type :string
+#
+
 class Token < ApplicationRecord
   belongs_to :tokenable, polymorphic: true
 

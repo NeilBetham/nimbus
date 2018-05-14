@@ -1,5 +1,12 @@
 default: &default
   token_expiry: 1.week
+  influxdb:
+    host: 'localhost'
+    port: 8086
+    username: 'test'
+    password: 'test'
+    database: 'weather'
+    verify_ssl: false
 
 development:
   <<: *default
