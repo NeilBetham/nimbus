@@ -4,7 +4,7 @@
 #
 #  id            :integer          not null, primary key
 #  name          :string
-#  type          :string
+#  device_name   :string
 #  last_received :datetime
 #  coord_north   :float
 #  coord_east    :float
@@ -17,7 +17,7 @@ class Station < ApplicationRecord
   has_many :tokens, as: :tokenable
 
   validates :name, presence: true
-  validates :type, presence: true
+  validates :device_name, presence: true
   validates :coord_north, presence: true
   validates :coord_east, presence: true
   validates :altitude, presence: true

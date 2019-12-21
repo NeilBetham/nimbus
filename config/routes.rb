@@ -9,9 +9,11 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-    resource :reporting, only:[] do
+    resources :stations, only:[] do
       post :reading
       post :health
     end
   end
+
+  match 'api/*_', via: [:options], to: 'api#options_stub'
 end

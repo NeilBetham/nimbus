@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180513011936) do
+ActiveRecord::Schema.define(version: 20191221083443) do
 
   create_table "stations", force: :cascade do |t|
     t.string "name"
-    t.string "type"
+    t.string "device_name"
     t.datetime "last_received"
     t.float "coord_north"
     t.float "coord_east"

@@ -1,31 +1,25 @@
 module Api
-  class ReportingsController < ApiController
-    before_action :set_station, only: [:reading]
+  class StationsController < ApiController
+    before_action :should_be_station
 
     def reading
-      if StoreReading.call(reading_params)
+      if StoreReading.call(station, reading_params)
         head :created
       else
         head :bad_request
       end
     end
 
-    def health
-
-    end
+    def health; end
 
     private
 
-    def set_station
-      unless @station = station
-        head :unauthorized
-      end
+    def should_be_station
+      head :unauthorized unless station
     end
 
     def station
-      if @token.tokenable.is_a?(Station)
-        @token.tokenable
-      end
+      return @token.tokenable if @token.tokenable.is_a?(Station)
     end
 
     def reading_params
