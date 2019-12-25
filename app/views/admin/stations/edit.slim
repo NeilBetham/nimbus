@@ -1,2 +1,29 @@
 h1 Editing Station
-= render 'form', station: @station 
+= render 'form', station: @station
+
+.top-pad-1em
+.divider
+h4 Tokens
+table.table.table-striped
+  thead
+    tr
+      th Created On
+      th Expires At
+      th Key
+      th
+  tbody
+    - @station.tokens.each do |t|
+      tr
+        td = t.created_at.to_formatted_s(:long)
+        - if t.does_not_expire
+          td Does Not Expire
+        - else
+          td = t.expires_at.to_formatted_s(:long)
+        td
+          .text-break = t.key
+        td
+          = link_to 'Destroy', admin_station_token_path(@station, t), method: :delete, class: 'btn btn-primary'
+.container
+  .columns
+    .column.col-12
+      = link_to 'Create Token', admin_station_tokens_path(@station), method: :post, class: 'btn btn-primary'

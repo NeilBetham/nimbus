@@ -18,9 +18,15 @@
 @import 'spectre';
 @import 'spectre-icons';
 @import 'spectre-exp';
+@import 'helpers';
 @import 'nav';
 @import 'inter';
 
 * {
   font-family: "Inter", sans-serif;
+}
+
+.container {
+  margin-bottom: .5rem;
+  margin-top: .5rem;
 }

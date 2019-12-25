@@ -6,8 +6,8 @@
           label.form-label Name
           = f.text_field :name, class: 'form-input'
         .form-group
-          label.form-label Type
-          = f.text_field :type, class: 'form-input'
+          label.form-label Device Name
+          = f.text_field :device_name, class: 'form-input'
         .form_group
           label.form-label Coordinates North
           = f.number_field :coord_north, step: 'any', class: 'form-input'
@@ -17,3 +17,5 @@
         .form-group
           label.form-label Altitude
           = f.number_field :altitude, step: 'any', class: 'form-input'
+        .form-group
+          = f.submit "Save", class: 'btn'

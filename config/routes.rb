@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'status#index'
-    resources :stations, only: [:index, :new, :edit, :create, :update, :destroy]
+    resources :stations, only: [:index, :new, :edit, :create, :update, :destroy] do
+      resources :tokens, only: [:create, :destroy]
+    end
   end
 
   namespace :api do

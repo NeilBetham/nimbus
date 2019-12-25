@@ -39,7 +39,7 @@ module Admin
     def station_params
       params.require(:station).permit(
         :name,
-        :type,
+        :device_name,
         :coord_north,
         :coord_east,
         :altitude

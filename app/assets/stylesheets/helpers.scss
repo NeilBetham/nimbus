@@ -1,0 +1,132 @@
+// Vertical spacers
+@for $i from 1 through 6 {
+  .spacer-#{$i}em { height: 1rem * $i; }
+}
+
+// Side padding
+@for $i from 1 through 6 {
+  .side-pad-#{$i}em { padding-left: 1rem * $i; padding-right: 1rem * $i;}
+}
+
+// Vertical padding
+@for $i from 1 through 6 {
+  .top-pad-#{$i}em {padding-top: 1rem * $i;}
+}
+
+@for $i from 1 through 6 {
+  .bot-pad-#{$i}em {padding-bottom: 1rem * $i;}
+}
+
+// Side margins
+@for $i from 1 through 6 {
+  .side-margin-#{$i}em { margin-left: 1rem * $i; margin-right: 1rem * $i;}
+}
+
+// Vertical margins
+@for $i from 1 through 6 {
+  .top-margin-#{$i}em {margin-top: 1rem * $i;}
+}
+
+@for $i from 1 through 6 {
+  .bot-margin-#{$i}em {margin-bottom: 1rem * $i;}
+}
+
+// inline display
+.inline {
+  display: inline;
+}
+
+// center
+.center {
+  text-align: center;
+}
+
+// width
+@for $i from 1 through 60 {
+  .width-#{$i}em {width: 1em * $i;}
+}
+
+.hundred {
+  width: 100%;
+}
+
+
+// text alignment
+.middle {
+  text-align: middle;
+}
+
+// Margins
+@for $i from 0 through 6 {
+  .mr#{$i} { margin-right: 1rem * $i; }
+}
+
+@for $i from 0 through 6 {
+  .ml#{$i} { margin-left: 1rem * $i; }
+}
+
+@for $i from 0 through 6 {
+  .mt#{$i} { margin-top: 1rem * $i; }
+}
+
+@for $i from 0 through 6 {
+  .mb#{$i} { margin-bottom: 1rem * $i; }
+}
+
+// Flexbox
+.flex {
+  display: flex;
+
+  &.wrap {
+    flex-wrap: wrap;
+  }
+
+  &.just-around {
+    justify-content: space-around;
+  }
+
+  &.just-start {
+    justify-content: flex-start;
+  }
+
+  &.align-i-center {
+    align-items: center;
+  }
+
+  &.align-i-start {
+    align-items: flex-start;
+  }
+
+  &.align-c-start {
+    align-content: flex-start;
+  }
+}
+
+.no-pad {
+  padding: 0;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.link-no-border {
+  &:focus,
+  &:active {
+    box-shadow: none;
+  }
+}
+
+// Min width helpers
+@for $i from 1 through 30 {
+  .min-width-#{$i}rem { min-width: 1rem * $i; }
+}
+
+.list-reset {
+  list-style: none;
+}
+
+// Max Width helpers
+@for $i from 5 through 30 {
+  .mw#{$i} { max-width: 1rem * $i; }
+}
