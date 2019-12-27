@@ -18,7 +18,7 @@ class StoreReading
   def data_hash
     {
       values: {
-        decoded: @params[:decoded_value],
+        decoded: @params[:decoded_value].to_f,
         raw: @params[:raw_value]
       },
       tags: {
