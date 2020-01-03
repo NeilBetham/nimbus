@@ -16,7 +16,7 @@ module TokenAuth
   def authenticate_token
     authenticate_with_http_token do |key, _|
       @token = Token.find_by(key: key)
-      @token && @token.expires_at > Time.now
+      @token && (@token.does_not_expire || @token.expires_at > Time.now)
     end
   end
 
