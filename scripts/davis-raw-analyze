@@ -1,0 +1,105 @@
+#!/usr/bin/env ruby
+require 'csv'
+require 'tabulo'
+require 'date'
+
+def puts_a(array)
+  puts "[#{array.join(', ')}]"
+end
+
+class ByteAnalyzer
+  attr_reader :flip_counts, :sums
+
+  def initialize(byte_count)
+    @init_complete = false
+    @flip_counts = [0] * byte_count * 8
+    @last_state = [0] * byte_count * 8
+    @sums = [0] * byte_count * 8
+    @byte_count = byte_count
+  end
+
+  def proccess(bytes)
+    return unless bytes && bytes.length == (@byte_count * 2)
+
+    current_row = bytes.hex.to_s(2).split('').map(&:to_i)
+    unless @init_complete
+      @last_state = current_row
+      @init_complete = true
+      return
+    end
+
+    current_row.each_with_index do |val, index|
+      @flip_counts[index] += 1 if val != @last_state[index]
+      @sums[index] += val
+    end
+
+    @last_state = current_row
+  end
+end
+
+def analyze(csv)
+  ba = ByteAnalyzer.new 3
+  sample_count = 0
+
+  csv.each do |l|
+    next unless l['raw'] != 'raw'
+    sample_count += 1
+    ba.proccess(l['raw'][1..-1])
+  end
+
+  puts "Sample Count: #{sample_count}"
+
+  indexes = *(0..(3 * 8 - 1))
+  table = Tabulo::Table.new(indexes.reverse, border: :modern, column_padding: 0, column_width: 5) do |t|
+    t.add_column('Flips') { |i| ba.flip_counts[(3 * 8 - 1) - i] }
+    t.add_column('Average') { |i| (ba.sums[(3 * 8 - 1) - i].to_f / sample_count.to_f).truncate(3)  }
+  end
+  puts table.transpose
+end
+
+def convert_raw(raw)
+  return unless raw && raw.length > 3
+
+  current_row = raw.hex.to_s(2).split('').map(&:to_i)
+  value_one = current_row[0..9]
+  value_two = current_row[14..16]
+  value_three = current_row[20..23]
+
+  [value_one.join.to_i(2), value_two.join.to_i(2), value_three.join.to_i(2)]
+end
+
+def proccess(csv)
+  proccessed = {}
+  times = []
+  csv.each do |l|
+    next unless l['time'].length > 4
+
+    times.append(l['time'])
+    trimmed_raw = l['raw'][1..-1]
+    proccessed[l['time']] = convert_raw(trimmed_raw) + [trimmed_raw.hex.to_s(2)]
+  end
+
+  table = Tabulo::Table.new(times, border: :modern, column_padding: 1) do |t|
+    t.add_column('Time') { |i| DateTime.strptime(i[0..-10 ],'%s') }
+    t.add_column('Value 1') { |i| proccessed[i][0] }
+    t.add_column('Value 1 as inHg') { |i| proccessed[i][0].to_f * 0.029530 }
+    t.add_column('Value 2') { |i| proccessed[i][1] }
+    t.add_column('Value 3') { |i| proccessed[i][2] }
+    t.add_column('Raw') { |i| proccessed[i][3] }
+  end
+
+  csv_out = CSV.open("#{ARGV[0]}.proccessed.csv", 'w')
+  table.each do |r|
+    csv_out << r.map(&:value)
+  end
+  csv_out.close
+end
+
+def open_csv(path)
+  CSV.open path, 'r', headers: true
+end
+
+if $PROGRAM_NAME == __FILE__
+  analyze open_csv ARGV[0]
+  proccess open_csv ARGV[0]
+end
