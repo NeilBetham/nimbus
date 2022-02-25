@@ -16,6 +16,11 @@ class StoreReading
   private
 
   def data_hash
+    timestamp = Time.now
+    if @params.has_key? :timestamp
+      timestamp = @params[:timestamp]
+    end
+
     {
       values: {
         decoded: @params[:decoded_value].to_f,
@@ -24,7 +29,7 @@ class StoreReading
       tags: {
         station_id: @station.id
       },
-      timestamp: DateTime.parse(@params[:timestamp]).to_time.to_i
+      timestamp: DateTime.parse(timestamp).to_time.to_i
     }
   end
 
