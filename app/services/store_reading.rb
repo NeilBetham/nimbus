@@ -16,7 +16,7 @@ class StoreReading
   private
 
   def data_hash
-    timestamp = Time.now
+    timestamp = Time.now.utc.to_s
     if @params.has_key? :timestamp
       timestamp = @params[:timestamp]
     end
