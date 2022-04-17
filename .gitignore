@@ -24,3 +24,6 @@
 
 config/database.yml
 config/nimbus-config.yml
+config/deploy/production.rb
+
+*.swp
